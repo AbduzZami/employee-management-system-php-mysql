@@ -87,11 +87,59 @@
         <div class="m-8 flex justify-center">
 
             <form onsubmit="createEmployee()" method="POST">
+
                 <input class="m-1 outline-none" type="text" name="emp_id" id="emp_id" placeholder=" Employee ID" required> <br>
 
                 <input class="m-1 outline-none" type="text" name="emp_name" id="emp_name" placeholder=" Employee Name" required> <br>
 
-                <input class="m-1 outline-none" type="text" name="dept_id" id="dept_id" placeholder=" Dept ID" required> <br>
+                <!-- <input class="m-1 outline-none" type="text" name="dept_id" id="dept_id" placeholder=" Dept ID" required> -->
+
+                <?php
+                // Database connection parameters
+                $servername = "localhost";
+                $username = "root";
+                $password = "admin";
+                $dbname = "employee_db";
+
+                // Create connection
+                $conn = new mysqli($servername, $username, $password, $dbname);
+
+                // Check connection
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                }
+
+                // SQL query to retrieve data from the database
+                $sql = "SELECT dept_id, dept_name FROM dept";
+
+                // Execute the query
+                $result = $conn->query($sql);
+
+                // Check if any rows were returned
+                if ($result->num_rows > 0) {
+                    // Start generating the dropdown list
+                    echo '<select class="mt-1.5 h-12  rounded-lg border-gray-300 text-gray-700 sm:text-sm" name="dept_id" id="dept_id" placeholder=" Dept ID" required>';
+                    echo '<option disabled selected value=1>Select Department</option>';
+                    // Output data of each row
+                    while ($row = $result->fetch_assoc()) {
+                        $id = $row["dept_id"];
+                        $dept_name = $row["dept_name"];
+
+                        // Create an option element for each row
+                        echo '<option value=' . $dept_id . '>' . $dept_name . '</option>';
+                    }
+
+                    // Close the dropdown list
+                    echo '</select>';
+                } else {
+                    echo "No results found.";
+                }
+
+                // Close the database connection
+                $conn->close();
+                ?>
+
+                <br>
 
                 <input class="m-1 outline-none" type="text" name="type_of_work" id="type_of_work" placeholder=" Employee's type of work" required> <br>
 

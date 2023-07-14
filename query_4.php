@@ -15,19 +15,14 @@
         <div>
             <a href="index.php" class="hover:underline italic">Back to Home</a>
         </div>
+        <div role="alert" class="rounded border-s-4 border-blue-500 bg-blue-50 p-4 my-5">
+            <strong class="block font-medium text-blue-800"> Query 4 </strong>
 
-        <div id="alert-additional-content-3" class="p-3 mb-4 text-blue-800 border border-blue-300 rounded-lg bg-blue-50" role="alert">
-            <div class="flex items-center">
-                <svg class="flex-shrink-0 w-4 h-4 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
-                </svg>
-                <span class="sr-only">Info</span>
-                <h3 class="text-lg font-medium">Query 4</h3>
-            </div>
-            <div class="mt-2 mb-4 text-lg font-bold">
+            <p class="mt-2 text-sm text-blue-700">
                 Retrieve the names of employees who work on both the Googong Subdivision and Burton Highway project
-            </div>
+            </p>
         </div>
+
 
         <div class="relative overflow-x-auto">
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
