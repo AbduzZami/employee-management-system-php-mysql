@@ -59,7 +59,9 @@
                     if (!$conn) {
                         die("Connection failed: " . mysqli_connect_error());
                     }
-
+                    $project_name = $_GET['project_name'];
+                    $dept_name = $_GET['dept_name'];
+                    $project_location = $_GET['project_location'];
                     $query = "SELECT e.emp_id AS 'Employee ID', e.emp_name AS 'Employee Name', p.project_name AS 'Project Name', p.project_location AS 'Project Location', d.dept_name AS 'Department'
                             FROM employee e
                             JOIN ft_pt_work fpw ON e.emp_id = fpw.emp_id
@@ -68,10 +70,10 @@
                             WHERE e.dept_id = (
                                 SELECT dept_id
                                 FROM dept
-                                WHERE dept_name = 'Engineering'
+                                WHERE dept_name = '$dept_name'
                             )
-                            AND p.project_name = 'Googong Subdivision'
-                            AND p.project_location = 'Googong'";
+                            AND p.project_name = '$project_name'
+                            AND p.project_location = '$project_location'";
 
                     $result = mysqli_query($conn, $query);
 

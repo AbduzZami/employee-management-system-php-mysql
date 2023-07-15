@@ -119,14 +119,14 @@
                 if ($result->num_rows > 0) {
                     // Start generating the dropdown list
                     echo '<select class="mt-1.5 h-12  rounded-lg border-gray-300 text-gray-700 sm:text-sm" name="dept_id" id="dept_id" placeholder=" Dept ID" required>';
-                    echo '<option disabled selected value=1>Select Department</option>';
+                    echo '<option disabled selected>Select Department</option>';
                     // Output data of each row
                     while ($row = $result->fetch_assoc()) {
-                        $id = $row["dept_id"];
+                        $dept_id = $row["dept_id"];
                         $dept_name = $row["dept_name"];
 
                         // Create an option element for each row
-                        echo '<option value=' . $dept_id . '>' . $dept_name . '</option>';
+                        echo '<option value="' . $dept_id . '">' . $dept_name . '</option>';
                     }
 
                     // Close the dropdown list
@@ -141,7 +141,14 @@
 
                 <br>
 
-                <input class="m-1 outline-none" type="text" name="type_of_work" id="type_of_work" placeholder=" Employee's type of work" required> <br>
+                <select class="mt-1.5 h-12  rounded-lg border-gray-300 text-gray-700 sm:text-sm" name="type_of_work" id="type_of_work" placeholder="Employee's type of work" required>
+                    <option value=>Select Type of Work</option>
+                    <option value="F">Full Time</option>
+                    <option value="H">Half Time</option>
+                </select>
+                <br>
+
+                <!-- <input class="m-1 outline-none" type="text" name="type_of_work" id="type_of_work" placeholder=" Employee's type of work" required> <br> -->
 
                 <input class="m-1 outline-none" type="text" name="hourly_rate" id="hourly_rate" placeholder=" Employee's hourly rate" required> <br>
 
