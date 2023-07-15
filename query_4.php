@@ -13,7 +13,12 @@
 <body>
     <div class="p-24">
         <div>
-            <a href="index.php" class="hover:underline italic">Back to Home</a>
+            <a class="inline-block rounded bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 p-[2px] hover:text-white focus:outline-none focus:ring active:text-opacity-75" href="/">
+                <span class="block rounded-sm bg-white px-8 py-3 text-sm font-medium hover:bg-transparent">
+                    Back to home
+                </span>
+            </a>
+
         </div>
         <div role="alert" class="rounded border-s-4 border-blue-500 bg-blue-50 p-4 my-5">
             <strong class="block font-medium text-blue-800"> Query 4 </strong>

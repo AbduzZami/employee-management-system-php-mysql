@@ -19,15 +19,17 @@
         $project_name = $_POST['project_name'];
         $dept_name = $_POST['dept_name'];
         $project_location = $_POST['project_location'];
+        $start_date = $_POST['start_date'];
+        $end_date = $_POST['end_date'];
 
         // Construct the URL with parameters
-        $url = 'query_1.php?project_name=' . urlencode($project_name) . '&dept_name=' . urlencode($dept_name)
-            . '&project_location=' . urlencode($project_location);;
+        $url = 'query_2.php?project_name=' . urlencode($project_name) . '&dept_name=' . urlencode($dept_name) . '&project_location=' . urlencode($project_location) . '&start_date=' . urlencode($start_date) . '&end_date=' . urlencode($end_date);
 
         // Redirect to the second page
         header("Location: $url");
         exit;
     }
+
 
     // Check if the form is submitted
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -39,10 +41,15 @@
 
     <div class="p-24">
         <div>
-            <a href="index.php" class="hover:underline italic">Back to Home</a>
+            <a class="inline-block rounded bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 p-[2px] hover:text-white focus:outline-none focus:ring active:text-opacity-75" href="/">
+                <span class="block rounded-sm bg-white px-8 py-3 text-sm font-medium hover:bg-transparent">
+                    Back to home
+                </span>
+            </a>
+
         </div>
         <h1 class="text-3xl text-center font-bold">
-            List the names of all Engineers in Googong Subdivision project located at Googong city
+            List the names of all Labour in Googong Subdivision project located at Googong city who work more than 20 hours per week
         </h1>
         <div class="m-8 flex justify-center">
             <form method="POST" onsubmit="createFtPtWork()">
@@ -181,6 +188,10 @@
                 // Close the database connection
                 $conn->close();
                 ?>
+
+                <br>
+                <input class="m-1 outline-none" type="date" name="start_date" id="start_date" placeholder="Start Date" required>
+                <input class="m-1 outline-none" type="date" name="end_date" id="end_date" placeholder="End Date" required> <br>
 
 
                 <!-- <input class="m-1 outline-none" type="text" name="dept_id" id="dept_id" placeholder="Department ID" required> <br> -->

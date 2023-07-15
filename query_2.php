@@ -13,7 +13,12 @@
 <body>
     <div class="p-24">
         <div>
-            <a href="index.php" class="hover:underline italic">Back to Home</a>
+            <a class="inline-block rounded bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 p-[2px] hover:text-white focus:outline-none focus:ring active:text-opacity-75" href="/">
+                <span class="block rounded-sm bg-white px-8 py-3 text-sm font-medium hover:bg-transparent">
+                    Back to home
+                </span>
+            </a>
+
         </div>
         <div role="alert" class="rounded border-s-4 border-blue-500 bg-blue-50 p-4 my-5">
             <strong class="block font-medium text-blue-800"> Query 2 </strong>
@@ -58,15 +63,27 @@
                         die("Connection failed: " . mysqli_connect_error());
                     }
 
-                    $query = "SELECT e.emp_name AS 'Employee Name', e.emp_id AS 'Employee ID', d.dept_name AS 'Department', p.project_name AS 'Project Name', fpw.num_of_hours AS 'Number of Working Hours'
-                            FROM employee e
-                            JOIN ft_pt_work fpw ON e.emp_id = fpw.emp_id
-                            JOIN dept d ON e.dept_id = d.dept_id
-                            JOIN project p ON fpw.project_id = p.project_id
-                            WHERE d.dept_name = 'Labor'
-                            AND p.project_name = 'Googong Subdivision'
-                            AND p.project_location = 'Googong'
-                            AND fpw.num_of_hours > 20";
+                    $project_name = $_GET['project_name'];
+                    $dept_name = $_GET['dept_name'];
+                    $project_location = $_GET['project_location'];
+                    $start_date =
+                        $_GET['start_date'];
+                    $end_date =
+                        $_GET['end_date'];
+
+                    $query = "SELECT e.emp_name AS 'Employee Name', e.emp_id AS 'Employee ID', d.dept_name AS 'Department', p.project_name AS 'Project Name', SUM(fpw.num_of_hours) AS 'Total Work Hours'
+                                FROM employee e
+                                JOIN ft_pt_work fpw ON e.emp_id = fpw.emp_id
+                                JOIN dept d ON e.dept_id = d.dept_id
+                                JOIN project p ON fpw.project_id = p.project_id
+                                WHERE d.dept_name = '$dept_name'
+                                AND p.project_name = '$project_name'
+                                AND p.project_location = '$project_location'
+                                -- AND fpw.num_of_hours > 1
+                                AND fpw.work_date >= '$start_date' -- Replace 'start_date' with the actual start date
+                                AND fpw.work_date <= '$end_date' -- Replace 'end_date' with the actual end date
+                                GROUP BY e.emp_name, e.emp_id, d.dept_name, p.project_name
+                                ";
 
                     $result = mysqli_query($conn, $query);
 
@@ -77,7 +94,7 @@
                             echo '<td class="px-6 py-4">' . $row["Employee ID"] . '</td>';
                             echo '<td class="px-6 py-4">' . $row["Department"] . '</td>';
                             echo '<td class="px-6 py-4">' . $row["Project Name"] . '</td>';
-                            echo '<td class="px-6 py-4">' . $row["Number of Working Hours"] . '</td>';
+                            echo '<td class="px-6 py-4">' . $row["Total Work Hours"] . '</td>';
                             echo '</tr>';
                         }
                     } else {

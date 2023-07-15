@@ -7,7 +7,6 @@
     <title>Document</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.css" rel="stylesheet" />
-
 </head>
 
 <body>
@@ -30,9 +29,10 @@
         $project_id = $_POST['project_id'];
         $emp_id = $_POST['emp_id'];
         $dept_id = $_POST['dept_id'];
+        $work_date = $_POST['work_date'];
         $num_of_hours = $_POST['num_of_hours'];
 
-        $sql = "INSERT INTO ft_pt_work (project_id, emp_id, dept_id, num_of_hours) VALUES ('$project_id', '$emp_id', '$dept_id', '$num_of_hours')";
+        $sql = "INSERT INTO ft_pt_work (project_id, emp_id, dept_id, work_date, num_of_hours) VALUES ('$project_id', '$emp_id', '$dept_id', '$work_date', '$num_of_hours')";
 
         // If the ft_pt_work table does not exist, then create the table
         $sql_create = "CREATE TABLE IF NOT EXISTS ft_pt_work (
@@ -40,6 +40,7 @@
             emp_id INT,
             dept_id INT,
             num_of_hours DECIMAL(10, 2),
+            work_date DATE,
             FOREIGN KEY (emp_id) REFERENCES employee(emp_id),
             FOREIGN KEY (dept_id) REFERENCES dept(dept_id),
             FOREIGN KEY (project_id) REFERENCES project(project_id)
@@ -58,7 +59,7 @@
         }
     }
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['project_id']) && isset($_POST['emp_id']) && isset($_POST['dept_id']) && isset($_POST['num_of_hours'])) {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['project_id']) && isset($_POST['emp_id']) && isset($_POST['dept_id']) && isset($_POST['num_of_hours']) && isset($_POST['work_date'])) {
         createFtPtWork($conn);
         // header("Location: insert_ft_pt_work.php");
         // exit();
@@ -70,7 +71,11 @@
 
     <div class="p-24">
         <div>
-            <a href="index.php" class="hover:underline italic">Back to Home</a>
+            <a class="inline-block rounded bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 p-[2px] hover:text-white focus:outline-none focus:ring active:text-opacity-75" href="/">
+                <span class="block rounded-sm bg-white px-8 py-3 text-sm font-medium hover:bg-transparent">
+                    Back to home
+                </span>
+            </a>
         </div>
         <h1 class="text-3xl text-center font-bold">
             Insert FT-PT Work
@@ -121,7 +126,7 @@
                 // Close the database connection
                 $conn->close();
                 ?>
-                <!-- <input class="m-1 outline-none" type="text" name="project_id" id="project_id" placeholder="Project ID" required> <br> -->
+
                 <?php
                 // Database connection parameters
                 $servername = "localhost";
@@ -166,7 +171,7 @@
                 // Close the database connection
                 $conn->close();
                 ?>
-                <!-- <input class="m-1 outline-none" type="text" name="emp_id" id="emp_id" placeholder="Employee ID" required> <br> -->
+
                 <?php
                 // Database connection parameters
                 $servername = "localhost";
@@ -213,7 +218,7 @@
                 ?>
 
 
-                <!-- <input class="m-1 outline-none" type="text" name="dept_id" id="dept_id" placeholder="Department ID" required> <br> -->
+                <input class="m-1 outline-none" type="date" name="work_date" id="work_date" placeholder="Work Date" required> <br>
                 <input class="m-1 outline-none" type="text" name="num_of_hours" id="num_of_hours" placeholder="Number of Hours" required> <br>
                 <div class="flex w-screen-full justify-center">
                     <input class="w-2/3 block rounded text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:m-3 outline-none dark:focus:ring-blue-800" type="submit" value="Submit">

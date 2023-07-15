@@ -71,11 +71,23 @@
     mysqli_close($conn);
     ?>
 
-    <div style="width:calc(100vw - 100px);">
-        <h1 class="text-3xl text-left font-bold m-20">
+    <div class="container mx-auto mt-20">
+
+
+        <!-- Base -->
+
+        <a class="inline-block rounded bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 p-[2px] hover:text-white focus:outline-none focus:ring active:text-opacity-75" href="/">
+            <span class="block rounded-sm bg-white px-8 py-3 text-sm font-medium hover:bg-transparent">
+                Back to home
+            </span>
+        </a>
+
+
+
+        <h1 class="text-3xl text-center text-left font-bold m-20">
             Insert an Address
         </h1>
-        <div class="m-8 ml-20 flex justify-start">
+        <div class="m-8 ml-20 flex justify-center">
             <form method="POST">
                 <?php
                 // Database connection parameters
@@ -123,7 +135,7 @@
                 ?>
                 <input class="m-1 outline-none" type="text" name="street_no" placeholder=" Street No" required> <br>
                 <input class="m-1 outline-none w-full" type="text" name="street_name" placeholder=" Street Name" required> <br>
-                <input class="m-1 outline-none" type="text" name="city" placeholder=" City" required> <br>
+                <input class="m-1 outline-none" type="text" name="city" placeholder=" City" required>
                 <input class="m-1 outline-none" type="text" name="zip_code" placeholder=" Zip Code" required> <br>
                 <div class="flex  justify-center">
                     <button class="inline-block rounded border border-indigo-600 bg-indigo-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500" type="submit">Insert</button>
