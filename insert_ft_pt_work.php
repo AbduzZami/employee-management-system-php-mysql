@@ -143,7 +143,8 @@
                 }
 
                 // SQL query to retrieve data from the database
-                $sql = "SELECT emp_id, emp_name FROM employee";
+                $sql = "SELECT e.emp_id, e.emp_name, d.dept_name FROM employee e, dept d where e.dept_id = d.dept_id
+";
 
                 // Execute the query
                 $result = $conn->query($sql);
@@ -157,9 +158,10 @@
                     while ($row = $result->fetch_assoc()) {
                         $emp_id = $row["emp_id"];
                         $emp_name = $row["emp_name"];
+                        $dept_name = $row["dept_name"];
 
                         // Create an option element for each row
-                        echo '<option value="' . $emp_id . '">' . $emp_name . '</option>';
+                        echo '<option value="' . $emp_id . '">' . $emp_name . '(' . $dept_name . ')' . '</option>';
                     }
 
                     // Close the dropdown list

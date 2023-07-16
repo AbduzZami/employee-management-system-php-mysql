@@ -72,7 +72,7 @@
                             JOIN project p ON fpw.project_id = p.project_id
                             JOIN address ad ON e.emp_id = ad.emp_id
                             JOIN dept d ON e.dept_id = d.dept_id
-                            WHERE p.project_location = 'Burton'
+                            WHERE p.project_location = 'Burton Canberra'
                             AND d.dept_location != 'Canberra'";
 
                     $result = mysqli_query($conn, $query);

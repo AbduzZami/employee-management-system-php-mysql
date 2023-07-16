@@ -42,7 +42,7 @@
         deduction DECIMAL(10, 2) GENERATED ALWAYS AS ((0.09 * basic) + (0.25 * basic)) STORED,
         net_salary DECIMAL(10, 2) GENERATED ALWAYS AS (basic + allowance - deduction) STORED,
         salary_date DATE,
-        FOREIGN KEY (emp_no) REFERENCES employee(emp_id)
+        FOREIGN KEY (emp_no) REFERENCES employee(emp_no)
     )";
         if (mysqli_query($conn, $sql_create)) {
             // echo "<script>alert('Table created successfully')</script>";
@@ -89,7 +89,51 @@
         </h1>
         <div class="m-8 flex justify-center">
             <form onsubmit="createSalary()" method="POST">
-                <input class="m-1 outline-none" type="text" name="emp_no" id="emp_no" placeholder="Employee Number" required> <br>
+                <?php
+                // Database connection parameters
+                $servername = "localhost";
+                $username = "root";
+                $password = "admin";
+                $dbname = "employee_db";
+
+                // Create connection
+                $conn = new mysqli($servername, $username, $password, $dbname);
+
+                // Check connection
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                }
+
+                // SQL query to retrieve data from the database
+                $sql = "SELECT emp_id, emp_name FROM employee";
+
+                // Execute the query
+                $result = $conn->query($sql);
+
+                // Check if any rows were returned
+                if ($result->num_rows > 0) {
+                    // Start generating the dropdown list
+                    echo '<select class="mt-1.5 h-12  rounded-lg border-gray-300 text-gray-700 sm:text-sm" name="emp_no" required>';
+                    echo '<option disabled selected>Select Employee</option>';
+                    // Output data of each row
+                    while ($row = $result->fetch_assoc()) {
+                        $emp_no = $row["emp_id"];
+                        $emp_name = $row["emp_name"];
+
+                        // Create an option element for each row
+                        echo '<option value="' . $emp_no . '">' . $emp_name . '</option>';
+                    }
+
+                    // Close the dropdown list
+                    echo '</select>';
+                } else {
+                    echo "No results found.";
+                }
+
+                // Close the database connection
+                $conn->close();
+                ?>
+                <!-- <input class="m-1 outline-none" type="text" name="emp_no" id="emp_no" placeholder="Employee Number" required> <br> -->
                 <input class="m-1 outline-none" type="text" name="basic" id="basic" placeholder="Basic Salary" required> <br>
                 <input class="m-1 outline-none" type="date" name="salary_date" id="salary_date" placeholder="Salary Date" required> <br>
                 <div class="flex w-screen-full justify-center">
