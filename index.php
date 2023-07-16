@@ -325,7 +325,7 @@
                                     </svg>
                                 </div>
                                 <div class="flex flex-wrap mt-5">
-                                    <h2 class="text-gray-900 text-lg title-font font-medium">Full/Half Times</h2><span class="whitespace-nowrap rounded-full bg-purple-100 px-2.5 py-0.5 text-sm text-purple-700">
+                                    <h2 class="text-gray-900 text-lg title-font font-medium">FT/PT Works</h2><span class="whitespace-nowrap rounded-full bg-purple-100 px-2.5 py-0.5 text-sm text-purple-700">
                                         <?php
                                         $host = 'localhost';
                                         $username = 'root';
